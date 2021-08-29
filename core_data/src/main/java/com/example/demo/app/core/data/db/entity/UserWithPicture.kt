@@ -2,7 +2,8 @@ package com.example.demo.app.core.data.db.entity
 
 import androidx.room.Embedded
 
-data class UserWithThumbnail(
+data class UserWithPicture(
     @Embedded val user: User,
-    @Embedded val thumbnail: UserPicture
+    @Embedded val address: Address,
+    @Embedded val picture: UserPicture,
 )

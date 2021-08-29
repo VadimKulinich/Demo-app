@@ -9,3 +9,7 @@ dependencyResolutionManagement {
 rootProject.name = "Demo App"
 include ':app'
 include ':core_data'
+include ':feature_feed'
+include ':core_domain'
+include ':core_ui'
+include ':utils'

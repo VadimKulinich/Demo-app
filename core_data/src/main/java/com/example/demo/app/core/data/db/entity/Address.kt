@@ -8,10 +8,9 @@ import androidx.room.PrimaryKey
     tableName = "address"
 )
 data class Address(
-    @ColumnInfo(name = "id") @PrimaryKey val id: String,
+    @ColumnInfo(name = "a_id") @PrimaryKey val id: String,
     @ColumnInfo(name = "street") val street: String,
+    @ColumnInfo(name = "number") val number: String,
     @ColumnInfo(name = "city") val city: String,
-    @ColumnInfo(name = "postcode") val postcode: String,
-    @ColumnInfo(name = "lat") val lat: Double,
-    @ColumnInfo(name = "long") val long: Double
+    @ColumnInfo(name = "postcode") val postcode: String
 )

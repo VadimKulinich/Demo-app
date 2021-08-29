@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dimen_main"
+    android:layout_marginTop="@dimen/dimen_main"
+    android:layout_marginEnd="@dimen/dimen_main"
+    android:background="@drawable/user_feed_bg"
+    android:padding="@dimen/dimen_main">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/formatted_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_main"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        tools:text="Mr. John Snow" />
+
+    <TextView
+        android:id="@+id/formatted_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_main"
+        android:layout_marginTop="@dimen/dimen_half"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/formatted_name"
+        tools:text="Street 12, City, 120392" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_main"
+        android:layout_marginTop="@dimen/dimen_half"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/formatted_address"
+        app:layout_constraintVertical_bias="1"
+        tools:text="911 23 22" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

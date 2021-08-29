@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_name_format">%s. %s %s</string>
+    <string name="user_address_format">%s %s, %s, %s</string>
+    <string name="fetch_feed_error">Cannot fetch feed. Please try again</string>
+    <string name="retry_label">Retry</string>
+    <string name="new_posts_label">New posts</string>
+    <string name="clear_cache">Clear cache</string>
+</resources>
