@@ -2,23 +2,25 @@ package com.example.demo.app.feature.feed.ui
 
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
+import com.example.demo.app.core.domain.ObservableUseCase
+import com.example.demo.app.core.domain.UseCase
 import com.example.demo.app.core.domain.invoke
 import com.example.demo.app.core.ui.adapter.model.ListItem
 import com.example.demo.app.feature.feed.R
-import com.example.demo.app.feature.feed.domain.ClearCacheUseCse
-import com.example.demo.app.feature.feed.domain.FetchFeedUseCase
-import com.example.demo.app.feature.feed.domain.ObserveFeedUseCase
-import com.example.demo.app.feature.feed.ui.mapper.UserWithPictureToUiUserMapper
-import com.example.demo.app.feature.feed.ui.model.UiUser
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
+import com.example.demo.app.feature.feed.photo.domain.model.Photo
+import com.example.demo.app.feature.feed.random.user.domain.model.User
+import com.example.demo.app.feature.feed.ui.mapper.PhotoToUiPhotoMapper
+import com.example.demo.app.feature.feed.ui.mapper.UserToUiUserMapper
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 class FeedViewModel(
-    private val fetchFeedUseCase: FetchFeedUseCase,
-    private val observeFeedUseCase: ObserveFeedUseCase,
-    private val clearCacheUseCse: ClearCacheUseCse,
-    private val mapper: UserWithPictureToUiUserMapper
+    private val fetchFeedUseCase: UseCase<Unit, Unit>,
+    private val clearCacheUseCse: UseCase<Unit, Unit>,
+    private val observeUserFeedUseCase: ObservableUseCase<Unit, List<User>>,
+    private val observePhotoFeedUseCase: ObservableUseCase<Unit, List<Photo>>,
+    private val usersMapper: UserToUiUserMapper,
+    private val photosMapper: PhotoToUiPhotoMapper,
 ) : ViewModel() {
 
     private val _fetchErrorMessage = MutableLiveData<@StringRes Int>()
@@ -35,9 +37,12 @@ class FeedViewModel(
     }
 
     fun observeFeed(): LiveData<List<ListItem>> =
-        observeFeedUseCase()
-            .map { it.map(mapper::map) }
-            .asLiveData()
+        observeUserFeedUseCase()
+            .combine(observePhotoFeedUseCase()) { users, photos ->
+                val uiUsers = users.map(usersMapper::map)
+                val uiPhotos = photos.map(photosMapper::map)
+                (uiUsers.plus(uiPhotos)).shuffled()
+            }.asLiveData()
 
     fun clearCache() {
         viewModelScope.launch {

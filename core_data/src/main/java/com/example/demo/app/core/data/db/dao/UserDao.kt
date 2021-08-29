@@ -2,8 +2,9 @@ package com.example.demo.app.core.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.demo.app.core.data.db.entity.*
+import com.example.demo.app.core.data.db.entity.user.*
 import com.example.demo.app.core.data.model.UserPictureType
 import kotlinx.coroutines.flow.Flow
 
@@ -31,13 +32,13 @@ interface UserDao {
     )
     suspend fun getFullUser(id: String): FullUser
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAddress(address: Address)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserPicture(userPicture: UserPicture)
 
     @Query("DELETE FROM address")

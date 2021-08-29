@@ -2,13 +2,15 @@ package com.example.demo.app.core.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.example.demo.app.core.data.db.dao.PhotoDao
 import com.example.demo.app.core.data.db.dao.UserDao
-import com.example.demo.app.core.data.db.entity.Address
-import com.example.demo.app.core.data.db.entity.User
-import com.example.demo.app.core.data.db.entity.UserPicture
+import com.example.demo.app.core.data.db.entity.photo.Photo
+import com.example.demo.app.core.data.db.entity.user.Address
+import com.example.demo.app.core.data.db.entity.user.User
+import com.example.demo.app.core.data.db.entity.user.UserPicture
 
 @Database(
-    entities = [Address::class, User::class, UserPicture::class],
+    entities = [Photo::class, Address::class, User::class, UserPicture::class],
     version = AppDatabase.VERSION
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -17,4 +19,6 @@ abstract class AppDatabase : RoomDatabase() {
     }
 
     abstract val userDao: UserDao
+
+    abstract val photoDao: PhotoDao
 }

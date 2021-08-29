@@ -37,6 +37,11 @@ dependencies {
     implementation project(":core_domain")
     implementation project(":utils")
     implementation project(":feature_feed")
+    implementation project(":feature_feed_random_user_data")
+    implementation project(":feature_feed_random_user_domain")
+    implementation project(':feature_feed_photo_data')
+    implementation project(':feature_feed_photo_domain')
+    implementation project(":feature_feed_aggregated_domain")
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"

@@ -36,10 +36,13 @@ android {
 
 dependencies {
 
-    implementation project(":core_data")
-    implementation project(":core_domain")
-    implementation project(":core_ui")
     implementation project(":utils")
+    implementation project(":core_ui")
+    implementation project(":core_domain")
+    implementation project(":feature_feed_domain_api")
+    implementation project(":feature_feed_aggregated_domain")
+    implementation project(":feature_feed_random_user_domain")
+    implementation project(':feature_feed_photo_domain')
 
     implementation 'com.google.android.material:material:1.4.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
@@ -58,10 +61,6 @@ dependencies {
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
-
-    // Network
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"

@@ -12,6 +12,7 @@ import com.example.demo.app.core.ui.adapter.MultiTypeAdapter
 import com.example.demo.app.core.ui.viewbinding.bind
 import com.example.demo.app.feature.feed.R
 import com.example.demo.app.feature.feed.databinding.FragmentFeedBinding
+import com.example.demo.app.feature.feed.ui.adapter.delegate.PhotoFeedDelegate
 import com.example.demo.app.feature.feed.ui.adapter.delegate.UserFeedDelegate
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +24,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     private val adapter: MultiTypeAdapter by lazy {
         MultiTypeAdapter().apply {
             registerDelegate(UserFeedDelegate())
+            registerDelegate(PhotoFeedDelegate())
         }
     }
 
@@ -36,7 +38,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.clear_cache) {
+        if (item.itemId == R.id.clear_cache) {
             viewModel.clearCache()
         }
         return super.onOptionsItemSelected(item)
@@ -44,7 +46,9 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        refresh()
+        if (savedInstanceState == null) {
+            refresh()
+        }
         val linearLayoutManager = LinearLayoutManager(requireContext())
         binding.feedList.adapter = adapter
         binding.feedList.layoutManager = linearLayoutManager
