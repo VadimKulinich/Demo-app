@@ -4,7 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.demo.app.core.data.db.entity.user.*
+import com.example.demo.app.core.data.db.entity.user.Address
+import com.example.demo.app.core.data.db.entity.user.User
+import com.example.demo.app.core.data.db.entity.user.UserPicture
+import com.example.demo.app.core.data.db.entity.user.UserWithPicture
 import com.example.demo.app.core.data.model.UserPictureType
 import kotlinx.coroutines.flow.Flow
 
@@ -21,16 +24,6 @@ interface UserDao {
     """
     )
     fun observeUsers(@UserPictureType type: Int): Flow<List<UserWithPicture>>
-
-    @Query(
-        """
-        SELECT * 
-        FROM user INNER JOIN user_picture ON user.u_id = user_picture.user_id
-                  INNER JOIN address ON user.address_id = address.a_id
-        WHERE user.u_id = :id
-    """
-    )
-    suspend fun getFullUser(id: String): FullUser
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAddress(address: Address)
